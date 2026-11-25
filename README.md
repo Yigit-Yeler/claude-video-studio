@@ -145,15 +145,15 @@ python --version
 **Git ile:**
 
 ```powershell
-git clone https://github.com/KULLANICI-ADI/REPO-ADI.git
+git clone https://github.com/Yigit-Yeler/claude-video-studio.git
 ```
 
 ```powershell
-cd REPO-ADI
+cd claude-video-studio
 ```
 
 **Git yoksa:** GitHub sayfasında yeşil **Code** butonuna, sonra **Download ZIP**'e bas. ZIP'i bir klasöre çıkar.
-PowerShell'de o klasöre gir (ör. `cd C:\Users\Adın\Desktop\video-automation`).
+PowerShell'de o klasöre gir (ör. `cd C:\Users\Adın\Desktop\claude-video-studio-main`).
 
 ### 5. Paketleri yükle
 
@@ -546,15 +546,15 @@ python --version
 **With Git:**
 
 ```powershell
-git clone https://github.com/KULLANICI-ADI/REPO-ADI.git
+git clone https://github.com/Yigit-Yeler/claude-video-studio.git
 ```
 
 ```powershell
-cd REPO-ADI
+cd claude-video-studio
 ```
 
 **Without Git:** On the GitHub page, click the green **Code** button, then **Download ZIP**. Extract the ZIP into a folder.
-In PowerShell, go into that folder (e.g. `cd C:\Users\YourName\Desktop\video-automation`).
+In PowerShell, go into that folder (e.g. `cd C:\Users\YourName\Desktop\claude-video-studio-main`).
 
 ### 5. Install the packages
 
