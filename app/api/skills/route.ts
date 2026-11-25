@@ -1,3 +1,4 @@
+import { errorMessage } from "@/lib/errors";
 import { listGeneratedSkills } from "@/lib/skill-author";
 
 export const runtime = "nodejs";
@@ -8,7 +9,7 @@ export async function GET() {
     const skills = await listGeneratedSkills();
     return Response.json({ skills });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Skiller okunamadı.";
+    const message = errorMessage(error, "Skiller okunamadı.");
     return Response.json({ error: message }, { status: 500 });
   }
 }

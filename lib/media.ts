@@ -223,3 +223,10 @@ export function safeImageFilename(original: string): string {
     .slice(0, 48);
   return `${base || "gorsel"}-${Date.now().toString(36)}${extension === ".jpeg" ? ".jpg" : extension}`;
 }
+
+/** Yüklenen dosyayı `public/media/<klasör>/<ad>` olarak kaydeder (klasör yoksa oluşturur). */
+export async function saveMediaFile(folder: string, filename: string, file: File): Promise<void> {
+  const directory = path.join(mediaRoot(), folder);
+  await fs.mkdir(directory, { recursive: true });
+  await fs.writeFile(path.join(directory, filename), Buffer.from(await file.arrayBuffer()));
+}

@@ -1,4 +1,4 @@
-import { SkillCreator } from "@/components/ui/SkillCreator";
+import { SkillCreator } from "@/components/skills/SkillCreator";
 
 export default function CreateSkillPage() {
   return <SkillCreator />;

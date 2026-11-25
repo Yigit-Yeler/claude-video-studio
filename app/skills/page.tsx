@@ -1,4 +1,4 @@
-import { SkillsManager } from "@/components/ui/SkillsManager";
+import { SkillsManager } from "@/components/skills/SkillsManager";
 
 export default function SkillsPage() {
   return <SkillsManager />;

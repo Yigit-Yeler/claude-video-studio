@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import ffmpegPath from "ffmpeg-static";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
     const parsed = JSON.parse(await fs.readFile(output, "utf8")) as { text?: string };
     return Response.json({ text: (parsed.text ?? "").trim() });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ses yazıya dökülemedi.";
+    const message = errorMessage(error, "Ses yazıya dökülemedi.");
     return Response.json({ error: message }, { status: 400 });
   } finally {
     await fs.rm(directory, { recursive: true, force: true }).catch(() => undefined);

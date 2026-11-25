@@ -1,4 +1,5 @@
 import { deletePrompt, listPrompts } from "@/lib/prompt-history";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,7 +8,7 @@ export async function GET() {
   try {
     return Response.json({ prompts: await listPrompts() });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Prompt geçmişi okunamadı.";
+    const message = errorMessage(error, "Prompt geçmişi okunamadı.");
     return Response.json({ prompts: [], error: message }, { status: 500 });
   }
 }

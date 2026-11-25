@@ -3,7 +3,7 @@ import "@mantine/notifications/styles.css";
 import { ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import type { Metadata } from "next";
-import { DashboardShell } from "@/components/ui/DashboardShell";
+import { DashboardShell } from "@/components/layout/DashboardShell";
 import "./globals.css";
 
 const theme = createTheme({

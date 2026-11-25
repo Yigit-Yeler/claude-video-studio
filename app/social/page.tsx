@@ -1,4 +1,4 @@
-import { SocialCopyPanel } from "@/components/ui/SocialCopyPanel";
+import { SocialCopyPanel } from "@/components/social/SocialCopyPanel";
 
 export default function SocialPage() {
   return <SocialCopyPanel />;

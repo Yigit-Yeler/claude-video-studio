@@ -1,4 +1,5 @@
 import { CLAUDE_MODELS, claudeAuthStatus, DEFAULT_CLAUDE_MODEL, DEFAULT_EFFORT, EFFORT_LEVELS } from "@/lib/claude-cli";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export async function GET() {
       warning: auth.error,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Claude Code durumu alınamadı.";
+    const message = errorMessage(error, "Claude Code durumu alınamadı.");
     return Response.json({ models: [], preferred: null, error: message }, { status: 200 });
   }
 }

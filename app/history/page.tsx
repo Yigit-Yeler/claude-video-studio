@@ -1,4 +1,4 @@
-import { RenderHistory } from "@/components/ui/RenderHistory";
+import { RenderHistory } from "@/components/history/RenderHistory";
 
 export default function HistoryPage() {
   return <RenderHistory />;

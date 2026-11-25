@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["remotion", "@remotion/player"],
-  serverExternalPackages: ["@cursor/sdk", "ffmpeg-static"],
+  serverExternalPackages: ["ffmpeg-static"],
   experimental: {
     agentUpgrade: "security",
   },

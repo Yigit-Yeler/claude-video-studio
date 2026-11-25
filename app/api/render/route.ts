@@ -1,4 +1,5 @@
 import { cancelRenderJob, createRenderJob, createRevisionJob, pauseRenderJob, readJob, readLatestJob, resumeRenderJob } from "@/lib/render-jobs";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,7 +11,7 @@ export async function POST(request: Request) {
     const job = body?.revise === true ? await createRevisionJob(body) : await createRenderJob(body);
     return Response.json(job);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Render başlatılamadı.";
+    const message = errorMessage(error, "Render başlatılamadı.");
     const status = message.includes("işleniyor") ? 409 : 400;
     return Response.json({ error: message }, { status });
   }
@@ -45,7 +46,7 @@ export async function PATCH(request: Request) {
     if (!job) return Response.json({ error: "İş bulunamadı." }, { status: 404 });
     return Response.json(job);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "İş güncellenemedi.";
+    const message = errorMessage(error, "İş güncellenemedi.");
     const status = message.includes("işleniyor") ? 409 : 400;
     return Response.json({ error: message }, { status });
   }

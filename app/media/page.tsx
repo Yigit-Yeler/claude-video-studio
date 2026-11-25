@@ -1,4 +1,4 @@
-import { MediaLibrary } from "@/components/ui/MediaLibrary";
+import { MediaLibrary } from "@/components/media/MediaLibrary";
 
 export default function MediaPage() {
   return <MediaLibrary />;

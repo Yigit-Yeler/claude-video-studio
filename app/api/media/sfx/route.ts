@@ -1,6 +1,7 @@
 import { listSfx, mediaRoot, safeCategory, safeSfxFilename, SFX_ROOT_CATEGORY } from "@/lib/media";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,7 +12,7 @@ export async function GET() {
   try {
     return Response.json(await listSfx());
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ses kütüphanesi okunamadı.";
+    const message = errorMessage(error, "Ses kütüphanesi okunamadı.");
     return Response.json({ items: [], categories: [], error: message }, { status: 500 });
   }
 }
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
     }
     return Response.json({ ...(await listSfx()), saved });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ses yüklenemedi.";
+    const message = errorMessage(error, "Ses yüklenemedi.");
     return Response.json({ error: message }, { status: 400 });
   }
 }

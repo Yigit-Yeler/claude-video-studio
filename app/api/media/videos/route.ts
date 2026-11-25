@@ -1,3 +1,4 @@
+import { errorMessage } from "@/lib/errors";
 import { createWriteStream } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
     return Response.json({ item });
   } catch (error) {
     if (target) await fs.rm(target, { force: true });
-    const message = error instanceof Error ? error.message : "Video yüklenemedi.";
+    const message = errorMessage(error, "Video yüklenemedi.");
     return Response.json({ error: message }, { status: 400 });
   }
 }

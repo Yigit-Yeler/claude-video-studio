@@ -1,6 +1,5 @@
-import { listAssets, mediaRoot, safeImageFilename } from "@/lib/media";
-import fs from "node:fs/promises";
-import path from "node:path";
+import { errorMessage } from "@/lib/errors";
+import { listAssets, safeImageFilename, saveMediaFile } from "@/lib/media";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,8 +8,7 @@ const MAX_BYTES = 20 * 1024 * 1024;
 
 export async function POST(request: Request) {
   try {
-    const form = await request.formData();
-    const file = form.get("file");
+    const file = (await request.formData()).get("file");
     if (!(file instanceof File)) {
       return Response.json({ error: "Görsel dosyası gerekli." }, { status: 400 });
     }
@@ -18,14 +16,10 @@ export async function POST(request: Request) {
       return Response.json({ error: "Görsel 20 MB sınırını aşıyor." }, { status: 400 });
     }
     const filename = safeImageFilename(file.name);
-    const directory = path.join(mediaRoot(), "assets");
-    await fs.mkdir(directory, { recursive: true });
-    await fs.writeFile(path.join(directory, filename), Buffer.from(await file.arrayBuffer()));
-    const assets = await listAssets();
-    const item = assets.find((entry) => entry.name === filename);
+    await saveMediaFile("assets", filename, file);
+    const item = (await listAssets()).find((entry) => entry.name === filename);
     return Response.json({ item });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Görsel yüklenemedi.";
-    return Response.json({ error: message }, { status: 400 });
+    return Response.json({ error: errorMessage(error, "Görsel yüklenemedi.") }, { status: 400 });
   }
 }

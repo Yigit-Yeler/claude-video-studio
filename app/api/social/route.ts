@@ -1,4 +1,5 @@
 import { parseSocialSource, readSocialJob, readSocialRecord, sourceKey, startSocialJob } from "@/lib/social-copy";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,7 +9,7 @@ export async function POST(request: Request) {
     const job = await startSocialJob(await request.json());
     return Response.json(job);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Metin üretimi başlatılamadı.";
+    const message = errorMessage(error, "Metin üretimi başlatılamadı.");
     return Response.json({ error: message }, { status: message.includes("sürüyor") ? 409 : 400 });
   }
 }
@@ -28,7 +29,7 @@ export async function GET(request: Request) {
     try {
       key = sourceKey(parseSocialSource(kind === "history" ? { kind, id: ref } : { kind, path: ref }));
     } catch (error) {
-      return Response.json({ error: error instanceof Error ? error.message : "Geçersiz video." }, { status: 400 });
+      return Response.json({ error: errorMessage(error, "Geçersiz video.") }, { status: 400 });
     }
     const record = await readSocialRecord(key);
     return record ? Response.json(record) : Response.json({ error: "Kayıt yok." }, { status: 404 });

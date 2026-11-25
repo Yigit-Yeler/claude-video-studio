@@ -6,6 +6,7 @@ import { claudeAuthStatus, DEFAULT_CLAUDE_MODEL, DEFAULT_EFFORT, modelLabel, res
 import { resolveMediaFile } from "./media";
 import { getRenderRecord, projectArchiveDir } from "./render-history";
 import { extractFrames, extractJson, runAgentProcess } from "./skill-author";
+import { errorMessage } from "./errors";
 
 // Paylaşım metinleri: bir video için TikTok, Instagram Reels ve YouTube Shorts açıklama/başlık/etiketleri.
 // Sonuçlar data/social-copy/<anahtar>.json içinde kalıcıdır; aynı video seçilince son sonuç tekrar gösterilir.
@@ -348,7 +349,7 @@ export async function startSocialJob(input: unknown): Promise<SocialJobState> {
         ...current,
         status: "error",
         detail: "Hata",
-        error: error instanceof Error ? error.message : "Metinler üretilemedi.",
+        error: errorMessage(error, "Metinler üretilemedi."),
         finishedAt: new Date().toISOString(),
       });
     })

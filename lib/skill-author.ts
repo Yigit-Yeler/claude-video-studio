@@ -5,6 +5,7 @@ import path from "node:path";
 import ffmpegPath from "ffmpeg-static";
 import { claudeAuthStatus, claudeEnv, DEFAULT_CLAUDE_MODEL, DEFAULT_EFFORT, modelLabel, openClaudeLogin, resolveClaudeCommand } from "./claude-cli";
 import { parseStyleSkillSpec, type StyleSkillSpec } from "./style-skill";
+import { errorMessage } from "./errors";
 
 export type SkillJobState = {
   id: string;
@@ -336,7 +337,7 @@ export async function startSkillJob(
   activeJobId = id;
 
   void analyze(id, prompt, name, strict).catch(async (error: unknown) => {
-    const message = error instanceof Error ? error.message : "Analiz başarısız.";
+    const message = errorMessage(error, "Analiz başarısız.");
     const current = await readSkillJob(id);
     if (!current || current.status !== "analyzing") return;
     await writeSkillJob({

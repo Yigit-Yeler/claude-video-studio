@@ -1,4 +1,5 @@
 import { getRenderRecord, listRenderRecords } from "@/lib/render-history";
+import { errorMessage } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
     }
     return Response.json({ records: await listRenderRecords() });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Geçmiş okunamadı.";
+    const message = errorMessage(error, "Geçmiş okunamadı.");
     return Response.json({ records: [], error: message }, { status: 500 });
   }
 }

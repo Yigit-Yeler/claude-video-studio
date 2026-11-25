@@ -20,6 +20,7 @@ import {
   spawnVideoAgent,
   type AgentEvent,
 } from "./video-agent";
+import { errorMessage } from "./errors";
 
 const MAX_LOG = 400;
 const DEFAULT_MODEL = DEFAULT_CLAUDE_MODEL;
@@ -184,7 +185,7 @@ function launchPipeline(id: string, model: string, mode: "start" | "resume" | "r
   activeJobId = id;
   void runPipeline(id, model, mode, serial)
     .catch(async (error: unknown) => {
-      const message = error instanceof Error ? error.message : "Video üretilemedi.";
+      const message = errorMessage(error, "Video üretilemedi.");
       const modelName = (error as { modelName?: string }).modelName;
       await updateJob(id, (current) =>
         isResting(current.status)

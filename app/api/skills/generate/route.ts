@@ -1,3 +1,4 @@
+import { errorMessage } from "@/lib/errors";
 import { readSkillJob, startSkillJob } from "@/lib/skill-author";
 
 export const runtime = "nodejs";
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
     const job = await startSkillJob(videos, prompt, skillName, strict);
     return Response.json(job);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Analiz başlatılamadı.";
+    const message = errorMessage(error, "Analiz başlatılamadı.");
     const status = message.includes("sürüyor") ? 409 : 400;
     return Response.json({ error: message }, { status });
   }

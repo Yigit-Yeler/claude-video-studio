@@ -363,9 +363,16 @@ Başka bir uygulama 3000 portunu kullanıyor. Onu kapat ya da `npm run dev -- -p
 ## 🗂️ Klasör yapısı
 
 ```text
-app/                      Sayfalar ve API uçları (Next.js)
-components/ui/            Panel bileşenleri
-lib/                      Video ajanı, skill yazarı, render işleri
+app/                      Sayfalar ve API uçları (Next.js App Router)
+components/
+  common/                 Ortak parçalar: sayfa başlığı, bilgi kartı, hata kutusu, yükleme butonu
+  layout/                 Yan menü ve üst bar
+  studio/                 Video Stüdyosu (form/, agent/, preview/, timeline/)
+  history/  social/  media/  skills/  prompt/
+hooks/                    Custom hook'lar: veri çekme, render takibi, stüdyo ayarları, mikrofon…
+lib/
+  client/                 Tarayıcı tarafı: API istemcisi, yükleme, depolama anahtarları
+  *.ts                    Sunucu tarafı: video ajanı, skill yazarı, render işleri, medya
 remotion/                 Video şablonları (Remotion)
   skills/generated/       Oluşturduğun skill'lerin kodu (otomatik)
 scripts/video-tools/      ffmpeg ve Python yardımcıları (kesme, altyazı, ritim)
@@ -764,9 +771,16 @@ Another app is using port 3000. Close it, or start with `npm run dev -- -p 3001`
 ## 🗂️ Folder structure
 
 ```text
-app/                      Pages and API routes (Next.js)
-components/ui/            Dashboard components
-lib/                      Video agent, skill author, render jobs
+app/                      Pages and API routes (Next.js App Router)
+components/
+  common/                 Shared pieces: page header, info card, error alert, upload button
+  layout/                 Sidebar and top bar
+  studio/                 Video Studio (form/, agent/, preview/, timeline/)
+  history/  social/  media/  skills/  prompt/
+hooks/                    Custom hooks: data fetching, render tracking, studio settings, microphone…
+lib/
+  client/                 Browser side: API client, uploads, storage keys
+  *.ts                    Server side: video agent, skill author, render jobs, media
 remotion/                 Video templates (Remotion)
   skills/generated/       Code for the skills you create (automatic)
 scripts/video-tools/      ffmpeg and Python helpers (cutting, captions, beats)
