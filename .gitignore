@@ -1,0 +1,83 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# local renders and job files
+/tmp/
+/public/renders/
+/public/jobs/
+
+# video kod arşivindeki ses dosyaları (büyük); kod ve kayıtlar takip edilir
+/data/render-history/*/project/public/
+
+# kaynak ve referans videoları (büyük, GitHub 100 MB sınırını aşabilir)
+/public/media/sources/*.mp4
+/public/media/references/*.mp4
+
+# yerel Claude Code ayarları (kişisel izinler)
+.claude/settings.local.json
+
+# python önbelleği
+__pycache__/
+
+# kullanıcı verisi: üretilen videolar, geçmiş, skill'ler, yüklenen medya
+/data/render-history/*
+!/data/render-history/.gitkeep
+/data/social-copy/*
+!/data/social-copy/.gitkeep
+/public/media/sources/*
+!/public/media/sources/.gitkeep
+/public/media/references/*
+!/public/media/references/.gitkeep
+/public/media/assets/*
+!/public/media/assets/.gitkeep
+/data/generated-skills/*
+!/data/generated-skills/.gitkeep
+/remotion/skills/generated/*
+!/remotion/skills/generated/.gitkeep
+
+# müzik ve ses efektleri: herkes kendi (telifsiz) seslerini koyar
+/public/media/music/*
+!/public/media/music/.gitkeep
+/public/media/sfx/**/*.*
+!/public/media/sfx/**/.gitkeep
+!/public/media/sfx/OKUBENI.md
